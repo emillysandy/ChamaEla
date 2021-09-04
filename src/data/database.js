@@ -1,3 +1,4 @@
+
 require('dotenv').config()
 const mongooose = require('mongoose')
 
@@ -18,24 +19,3 @@ const connect = () => {mongooose.connect(MONGO_URL,{
 }
 
 module.exports = {connect}
-
-{/*require('dotenv').config()
-const mongoose = require('mongoose')
-
-const MONGO_URL = process.env.MONGODB_URI
-
-const connect = () => {
-    mongoose.connect(MONGO_URL, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    })
-    .then(()=>{
-        console.log("Conectadas bb no MongoDb Atlas")
-    })
-    .catch((error)=>{
-        console.log("Algo deu errado")
-        console.error(error)
-    })
-}
-
-module.exports = { connect }*/}
