@@ -2,7 +2,7 @@
 require('dotenv').config()
 const mongooose = require('mongoose')
 
-const MONGO_URL = process.env.MOGODB_URI || 'mongodb://localhost:27017/chamaela-db'
+const MONGO_URL = process.env.MOGODB_URI 
 
 const connect = () => {mongooose.connect(MONGO_URL,{
     useNewUrlParser: true,
