@@ -80,49 +80,35 @@ const upadateServico = async (req, res)=>{
     }
 }
 
-{/*const getByCity = (request,res) => {
-    const requestedCity = request.query.cidade.toLowerCase()
+const providersByCity = (req, res) => {
+    const city = req.params.cidade;
+    Provider.find(
+      { cidade: city },
+      (err, provider) => {
+        if (err) {
+          return res.status(424).send({ message: err.message });
+        } else if (provider) {
+          return res.status(200).send(provider);
+        }
+        res.status(404).send("City not found!");
+      }
+    );
+  };
 
-    const filteredCity = providers.find(providers => providers.cidade.toLowerCase().includes(requestedCity))
-
-    if(requestedCity == "" || filteredCity == undefined){
-        res.status(404).send({
-            "message": "Por favor, insira um título válido."
-        })
-    }else{
-        res.status(200).send(filteredCity)
-    }
-};
-router.get("/providers/cidade", async (req,res) => {
-    const requestedCity = req.params.cidade
-    const selectedCity = await Provider.find({cidade: requestedCity})
-    res.status(200).json(selectedCity)
-});
-
-router.get("/providers/servico", async (req,res) => {
-    const requestedService = req.params.servico
-    const selectedService = await Provider.find({servico: requestedService})
-    res.status(200).json(selectedService)
-});
-
-const deleteProvider = (request, response) => {
-    const idRequirido = request.params.id;
-    const filteredProvider = providers.find(providers => providers.id == idRequirido);
-
-    const indice = providers.indexOf(filteredProvider)
-    providers.splice(indice, 1);
-
-    response.status(200).send(
-        [
-            {
-                "mensagem": "Prestadora de serviço deletada com sucesso"
-
-            },
-            providers
-        ]
-    )
-}*/}
-
+  const providersByServico = (req, res) => {
+    const servico = req.params.servico;
+    Provider.find(
+      { servico: servico },
+      (err, provider) => {
+        if (err) {
+          return res.status(424).send({ message: err.message });
+        } else if (provider) {
+          return res.status(200).send(provider);
+        }
+        res.status(404).send("Service not found");
+      }
+    );
+  };
 
 
 
@@ -133,5 +119,7 @@ module.exports = {
     deleteProvider,
     upadateEmail,
     upadateCidade,
-    upadateServico
+    upadateServico,
+    providersByCity,
+    providersByServico
 }

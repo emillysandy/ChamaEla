@@ -9,6 +9,8 @@ router.get("/oi", (req, resp)=>{
 });
 
 router.get("/providers", providersControllers.getAllProviders);
+router.get("/providers/:cidade",providersControllers.providersByCity);
+router.get("/providers/:servico",providersControllers.providersByServico);
 
 router.post("/providers/cadastrar", providersControllers.createProvider);
 
