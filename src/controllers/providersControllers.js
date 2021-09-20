@@ -1,10 +1,28 @@
 const mongoose = require('mongoose');
 const Provider = require("../models/provider");
+const SECRET = process.env.SECRET
+//console.log(process.env)
 
 const getAllProviders = async (req, res) => {
+    const authHeader = req.get('authorization');
+    const token = authHeader.split(' ')[1]
+    // console.log(token)
+  
+    if (!token) {
+      return res.status(403).send({message: "Kd a tokenzinnn"})
+    }
+    // usar método do jwt para autenticar a rota
+      // verificação do token com o SECRET do projeto
+    jwt.verify(token, SECRET, async (err) => {
+      if (err) {
+        res.status(403).send({ message: 'Token não válido', err})
+      }
+
     const providers = await Provider.find()
     res.status(200).json(providers)
+    })
 };
+
 
 const createProvider = async (req,res) => {
     const provider = new Provider ({
